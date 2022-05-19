@@ -61,7 +61,7 @@ public class  MainActivity extends JFrame {
     private void setStokPanel() throws IOException{
         Border _borderMiddle = BorderFactory.createTitledBorder("Select Product");
         JPanel _middlePanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        _middlePanel.setBounds(10, 70, this._screenWidth - 280, this._screenHeight);
+        _middlePanel.setBounds(10, 70, this._screenWidth - 280, this._screenHeight-300);
         _middlePanel.setBorder(_borderMiddle);
 
         ArrayList<Shopper> _listItem = getProductData();
@@ -86,7 +86,7 @@ public class  MainActivity extends JFrame {
                     _listItem.get(index).get_size() + "<br/>" +
                     _listItem.get(index).get_description() +
                     "<br/>Price : " + _listItem.get(index).get_price() + "<br/>");
-            String _PATH = "C:\\Users\\ASUS\\IdeaProjects\\Projectjava\\image";
+            String _PATH = "C:/Users/ASUS/IdeaProjects/Projectjava/image/";
             imageIcons[index] = new ImageIcon(_PATH + fileName); //load the image to a imageIcon
             Image image1 = imageIcons[index].getImage(); //Imageicon.getImage(); //transform it
             Image newing1 = image1.getScaledInstance(120, 120, Image.SCALE_SMOOTH); //scale it the smooth way
@@ -159,7 +159,7 @@ public class  MainActivity extends JFrame {
 
         for (int index = 0;index<_sortTitle.length;index++){
             _sortButton[index] = new JButton();
-            _sortButton[index].setText(_sortTitle[index++]);
+            _sortButton[index].setText(_sortTitle[index]);
             _sortButton[index].setSize(new Dimension(100,30));
             _sortPanel.add(_sortButton[index]);
         }
@@ -168,7 +168,7 @@ public class  MainActivity extends JFrame {
     public void setSearchPanel(){
         Border _borderSearch = BorderFactory.createTitledBorder("Search");
         JPanel _searchPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        _searchPanel.setBounds(520,this._screenHeight,570,120);
+        _searchPanel.setBounds(520,this._screenHeight-210,570,120);
         _searchPanel.setBorder(_borderSearch);
         JTextField _searchText = new JTextField();
         _searchText.setPreferredSize(new Dimension(500,30));
@@ -185,12 +185,12 @@ public class  MainActivity extends JFrame {
         }
         this.add(_searchPanel);
     }
-    private JSONArray productsJSONArray;
+//    private JSONArray productsJSONArray;
     private ArrayList<Shopper> getProductData() throws IOException {
         URL sMe = ConnectURI.buildURL("https://java-api.mimoapps.xyz/getproducts.php");
         String productsResponse = ConnectURI.getResponseFromHttpUrl(sMe);
         assert productsResponse != null;
-        JSONArray productJSONArray = new JSONArray(productsResponse);
+        JSONArray productsJSONArray = new JSONArray(productsResponse);
         ArrayList<Shopper> productList = new ArrayList<>();
         for (int index = 0; index<productsJSONArray.length();index++){
             Shopper productsModel = new Shopper();
